@@ -1,2 +1,2 @@
 # ansible-elk-stack
-This repository setup an ELK Stack installation using ansible
+This repository set up an ELK (Elasticsearch, Logstash, Kibana) Stack installation using Ansible.
