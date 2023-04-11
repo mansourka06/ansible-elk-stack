@@ -1,0 +1,7 @@
+http.host: "0.0.0.0"
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.hosts: ["http://{{ es_hostname }}:{{ es_http_port }}"]
+pipeline.batch.size: 125
+pipeline.batch.delay: 50
+path.data: /var/lib/logstash
+path.logs: /var/log/logstash

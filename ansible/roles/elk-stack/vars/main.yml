@@ -1,0 +1,14 @@
+---
+# vars file for elk-stack
+elk_packages:
+  - elasticsearch
+  - logstash
+  - kibana
+
+# elasticsearch vars
+es_hostname: "{{ ansible_default_ipv4 }}"  # or {{ ansible_hostname }}
+es_http_port: 9200
+
+# kibana vars
+kibana_port: 5601
+kibana_host: "0.0.0.0"   # or {{ ansible_hostname }}

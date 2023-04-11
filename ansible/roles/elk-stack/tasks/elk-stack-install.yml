@@ -1,0 +1,76 @@
+---
+################################################################
+# Installation of ELK(Elasticsearch, Logstash, Kibana) packages
+################################################################
+
+- debug:
+    msg: "Installation of the ELK Stack Packages"
+
+# Install Elasticsearch
+- name: Add Elasticsearch apt_key url
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  become: true
+
+- name: Add Elasticsearch repo url
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/7.x/apt stable main'
+    state: present
+  become: true
+
+- name: Install Elasticsearch package
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name:
+      - apt-transport-https
+      - elasticsearch
+  become: true
+  tags: 
+    - elk
+    - elasticsearch
+  notify: restart elasticsearch
+
+# - name: Verify Elasticsearch installation
+#   uri:
+#     url: http://localhost:9200
+#     method: GET
+#     return_content: yes
+#   register: es_response
+
+# - name: Display Elasticsearch status
+#   debug:
+#     var: es_response.content
+
+# Install Logstash
+- name: Install Logstash
+  package:
+    name: logstash
+    state: present
+  tags: 
+    - elk
+    - logstash
+  notify: restart logstash
+
+#Install Kibana
+- name: Install Kibana
+  package:
+    name: kibana
+    state: present
+  tags: 
+    - elk
+    - kibana
+  notify: restart kibana
+
+- name: Start and enable ELK services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: 
+    - elasticsearch
+    - logstash
+    - kibana
+
+...

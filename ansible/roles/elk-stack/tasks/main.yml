@@ -1,0 +1,14 @@
+---
+# tasks file for elk-stack
+
+- name: Install ELK Stack
+  import_tasks: "elk-stack-install.yml"
+  tags: 
+    - elk
+    - elk_install 
+
+- name: Configure ELK Stack
+  import_tasks: "elk-stack-config.yml"
+  tags: 
+    - elk
+    - elk_config

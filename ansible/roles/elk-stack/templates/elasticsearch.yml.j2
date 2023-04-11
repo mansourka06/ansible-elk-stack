@@ -1,0 +1,4 @@
+cluster.name: my-cluster
+node.name: "{{ inventory_hostname }}"
+network.host: 0.0.0.0
+discovery.seed_hosts: ["{{ ansible_default_ipv4 }}"]

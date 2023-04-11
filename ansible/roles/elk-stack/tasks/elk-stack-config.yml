@@ -1,0 +1,42 @@
+---
+##################################################################
+# Configuration of the ELK(Elasticsearch, Logstash, Kibana) Stack
+##################################################################
+- name: "Deploy ELK Configurations"
+  debug:
+    msg: "Deployment of the ELK Stack Confifuartions files"
+
+- name: Set Elasticsearch JVM options
+  replace:
+    path: /etc/elasticsearch/jvm.options
+    regexp: '#-Xms4g\n#-Xmx4g'
+    replace: '-Xms2g\n-Xmx2g'
+    
+- name: Configure Elasticsearch
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+  notify: restart elasticsearch
+  tags:
+    - elk
+    - elasticsearch
+
+- name: Configure Logstash
+  template:
+    src: logstash.conf.j2
+    dest: /etc/logstash/conf.d/logstash.conf
+  notify: restart logstash
+  tags:
+    - elk
+    - logstash
+
+- name: Configure Kibana
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+  notify: restart kibana
+  tags:
+    - elk
+    - kibana
+
+...
