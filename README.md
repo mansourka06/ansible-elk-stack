@@ -25,4 +25,4 @@ This repository contains an Ansible playbook and associated files for installing
 
 
 ## Author
-- Mansour KA  [E-mail](mailmansour@gmx.fr)
+- Mansour KA  [E-mail](kamansour06@gmail.com)
